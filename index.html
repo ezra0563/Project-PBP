@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezra Migguelle's Portofolio</title>
+    <!-- untuk load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- utk load Font Awesome for Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH572Xg48gD7vJ151eUvU/t3W70+rQW+0UvB4+y1Wz28Gj3D75Qp6z8Qf/W0G+l/yK+N+9wQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --bg-outer: #707070; /* outer */
+            --bg-header: #212529; /* buat Header */
+            --bg-card-2: #464646; /* buat Page 2 & 3 */
+            --bg-card-1: #c0c0c0; /* buat Page 1 */
+            --text-dark: #212529;
+            --text-light: #ffffff;
+            --text-page-2: #ffffff; /* Teks di Page 2 */
+        }
+
+        body {
+            background-color: var(--bg-outer);
+            color: var(--text-dark); 
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+        }
+
+        /* Styling Header */
+        .app-header {
+            background-color: var(--bg-header);
+            color: var(--text-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .nav-link.active {
+            border-bottom: 3px solid var(--text-light);
+            font-weight: 700;
+        }
+
+        /* Styling Page 1 */
+        .main-card {
+            background-color: var(--bg-card-1);
+            border-radius: 12px;
+            padding: 5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styling Card Page 2 & 3 */
+        .page-2-card {
+            background-color: var(--bg-card-2); /* warna ikut ketentuan diatas (style root:) */
+            color: var(--text-page-2); 
+            border-radius: 12px;
+            padding: 4rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Styling gmbr profile */
+        .profile-img-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* Styling contact button */
+        .btn-contact {
+            background-color: black;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 6px;
+            margin-bottom: 3rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-contact:hover {
+            background-color: #333;
+            color: white;
+        }
+        
+        /* Font size & spacing page 1 */
+        .title-name {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle-job {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+        }
+
+        .about-me-title {
+            font-weight: 700;
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .text-secondary {
+            font-size: 1.4rem;
+        }
+
+        /* style khusus page 2 & 3 */
+        .section-title-2 {
+            font-weight: 900;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-content-2 {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .text-content-2 span {
+            font-weight: normal; /* Untuk bIo data */
+        }
+        
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .list-style-2 {
+            list-style-type: disc;
+            padding-left: 25px;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* bingkai foto buat page 2 (persegi) */
+        .image-placeholder-frame {
+            background-color: #555;
+            border: 5px solid #333;
+            border-radius: 8px;
+            /* make padding-top biar aspek rasio gmbr 1:1 */
+            width: 100%;
+            padding-top: 100%; 
+            position: relative;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ddd;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .image-placeholder-frame span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+
+        /* buat page yang hidden */
+        .page-content {
+            display: none;
+            padding: 4rem;
+            background-color: var(--bg-card-1); /* Warna default */
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+        /* style buat kotak yang lbh besar (pop up page) */
+        .contact-modal-content {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        /* Warna semua iocn */
+        .whatsapp-color { color: #25D366; }
+        .phone-color { color: #007bff; }
+        .email-color { color: #D44638; }
+
+
+        /* style box button (Page 3) */
+        .exp-box {
+            background-color: #707070; /* warna bisa berubah krn bisa diganti oleh background image */
+            border-radius: 12px;
+            padding: 2.5rem;
+            min-height: 200px; 
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative; /* untuk pseudo-element overlay */
+            overflow: hidden; /* fungsi spy gambar tidak keluar dari batas */
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* Overlay untuk Kontras Gambar */
+        .exp-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Hitam transparan (40% opacity) */
+            border-radius: 12px;
+            transition: background-color 0.3s;
+            z-index: 1; /* memastikan overlay di bawah teks */
+        }
+
+        .exp-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .exp-box:hover::before {
+            background-color: rgba(0, 0, 0, 0.6); /* Lebih gelap pas mouse hover-in */
+        }
+
+        .exp-title, .exp-date {
+            position: relative;
+            z-index: 2; /* teks di atas overlay */
+            color: var(--text-light); /* Font putih */
+            /* Text Shadow biar text tetap bisa dibaca dalam bg apapun */
+            text-shadow: 0 0 5px #000000, 0 0 8px #000000; 
+        }
+
+        .exp-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .exp-date {
+            font-size: 1rem;
+            color: #ddd;
+        }
+        
+        .exp-modal-content {
+            background-color: var(--bg-card-2);
+            color: var(--text-page-2);
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 95%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .exp-modal-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #aaa;
+            padding-bottom: 0.5rem;
+        }
+
+        .exp-modal-details {
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER & NAVIGASI -->
+    <header class="app-header">
+        <div class="container-fluid d-flex justify-content-between align-items-center py-3 px-5">
+            <h3 class="m-0 fs-3">Ezra Migguelle's Portofolio</h3>
+            <nav class="d-flex">
+                <a class="nav-link active" id="link-home" href="#" onclick="showPage('home')">Home Page</a>
+                <a class="nav-link" id="link-data" href="#" onclick="showPage('data')">Bio Data</a>
+                <a class="nav-link" id="link-exp" href="#" onclick="showPage('exp')">Expiriences</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA - HOME PAGE -->
+    <div id="home" class="container" style="display: block;">
+        <div class="main-card mx-auto my-5" style="max-width: 1800px;">
+            <div class="row">
+
+                <!-- left side: Teks dan Tombol -->
+                <div class="col-12 col-lg-7 d-flex flex-column order-2 order-lg-1 pe-lg-5">
+                    
+                    <!-- Tombol contact -->
+                    <button class="btn-contact align-self-start" onclick="document.getElementById('contactModal').style.display='flex'">
+                        CONTACT ME^^
+                    </button>
+
+                    <p class="mb-0 fs-3">Hello, i'm</p>
+                    <h1 class="title-name">Ezra Migguelle</h1>
+                    <p class="subtitle-job text-muted">[Computer Science Student | Programmer | Actor]</p>
+
+                    <!-- About Me -->
+                    <p class="about-me-title">About me:</p>
+                    <p class="text-secondary">
+                        A 19-year-old Computer Science major who believes in giving 100%—from mastering algorithms to delivering results in the workplace. I utilize the critical thinking from my studies to excel, and channel my expressive energy through modeling and acting. I'm here to build, perform, and conquer.
+                    </p>
+                </div>
+                
+                <!-- right side: Foto profile -->
+                <div class="col-12 col-lg-5 d-flex justify-content-center align-items-start order-1 order-lg-2 mb-4 mb-lg-0">
+                    <div class="profile-img-container shadow-lg" style="max-width: 600px;">
+                        
+                        <!-- link gambar -->
+                        <img src="IMG_2052.JPG" 
+                             onerror="this.onerror=null; this.src='IMG_2052.JPG';"
+                             alt="Foto Profil Ezra Migguelle" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Page 2: Bio data -->
+    <div id="data" class="page-content container" style="max-width: 1800px;">
+        <div class="page-2-card mx-auto my-5">
+            
+            <!-- bagian atas bersebelahan -->
+            <div class="row g-5 mb-5"> 
+                
+                <!-- gambar di left side -->
+                <div class="col-12 col-lg-5 d-flex flex-column justify-content-start">
+                    <!-- Gmbr page 2 -->
+                    <div class="image-placeholder-frame">
+                        <img src="IMG_7905.JPG"
+                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+
+                <!-- right side - bio data -->
+                <div class="col-12 col-lg-7">
+                   
+                    <h2 class="section-title-2">Bio Data:</h2>
+                    <div class="text-content-2 ps-3">
+                        <p class="mb-1">Date of Birth: <span>Sidoarjo, 10 November 2005</span></p>
+                        <p class="mb-1">Address: <span>Bale Hinggil Apartement, Surabaya</span></p>
+                        <p class="mb-1">Phone Number: <span>081333397609</span></p>
+                        <p class="mb-1">Citizenship: <span>Indonesia</span></p>
+                        <p class="mb-1">Email: <span>tanezra.fb@gmail.com</span></p>
+                        <p class="mb-1">Status: <span>Unmarried</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- bagain bwh -->
+            <div class="row g-5 pt-3">
+                
+                
+                <div class="col-12 col-lg-6">
+                    <!-- 3. EDUCATION -->
+                    <h2 class="section-title-2 text-start">Education:</h2>
+                    <div class="ps-3 mb-5">
+                        <div class="education-item">
+                            <span class="fw-bold">SDK Untung Suropati 1</span>
+                            <span>(2012 - 2018)</span>
+                        </div>
+                        <div class="education-item">
+                            <span class="fw-bold">SMP Petra 5</span>
+                            <span>(2018 - 2021)</span>
+                        </div>
+                        <div class="education-item">
+                            <span class="fw-bold">SMK Petra</span>
+                            <span>(2021 - 2024)</span>
+                        </div>
+                        <div class="education-item">
+                            <span class="fw-bold">Universitas Negeri Surabaya</span>
+                            <span>(2024 - now)</span>
+                        </div>
+                    </div>
+
+                    <!--HOBBY -->
+                    <h2 class="section-title-2 mt-5">Hobby:</h2>
+                    <ul class="list-style-2">
+                        <li>Readings</li>
+                        <li>Travelling</li>
+                        <li>Musics</li>
+                        <li>Learn New Languages</li>
+                        <li>Sports</li>
+                        <li>Programming</li>
+                        <li>Modeling</li>
+                    </ul>
+                </div>
+
+                <!-- kanan bwh -->
+                <div class="col-20 col-lg-6">
+                    <!-- SKILLS -->
+                    <h2 class="section-title-2 text-start">Skills:</h2>
+                    <ul class="list-style-2">
+                        <li>Leaderships</li>
+                        <li>Communication</li>
+                        <li>Team Works</li>
+                        <li>Bilingual (English, Indonesia)</li>
+                        <li>Microsoft office suites</li>
+                        <li>Data Analyst</li>
+                        <li>Programming languanges (CPP and Phython)</li>
+                        <li>Public Speaking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- page 3 EXPIRIENCES -->
+    <div id="exp" class="page-content container" style="max-width: 1800px;">
+        <div class="page-2-card mx-auto my-5">
+            <h2 class="section-title-2 text-light mb-5">Expirences:</h2>
+            
+            <!-- 2 grid expirience -->
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                
+                <!-- BOX 1 - MODELING -->
+                <div class="col">
+                    <div class="exp-box" onclick="showExpDetails('model')" style="background-image: url('IMG_5294.jpg');">
+                        <h3 class="exp-title">Model Expirience</h3>
+                        <p class="exp-date">2021 - Present</p>
+                    </div>
+                </div>
+
+                <!-- BOX 2 - INTERNSHIP -->
+                <div class="col">
+                    <div class="exp-box" onclick="showExpDetails('toyota')" style="background-image: url('toyota.jpeg');">
+                        <h3 class="exp-title">Toyota's Dealer Intership</h3>
+                        <p class="exp-date">June - October 2024</p>
+                    </div>
+                </div>
+
+                <!-- BOX 3 - ACTOR -->
+                <div class="col">
+                    <div class="exp-box" onclick="showExpDetails('actor')" style="background-image: url('Thh landscape bromo.jpg');">
+                        <h3 class="exp-title">Actor Expirience</h3>
+                        <p class="exp-date">2024 - Present</p>
+                    </div>
+                </div>
+
+                <!-- BOX 4 - INTERNSHIP KJA -->
+                <div class="col">
+                    <div class="exp-box" onclick="showExpDetails('kja')" style="background-image: url('kja om shane.jpeg');">
+                        <h3 class="exp-title">KJA  (Kantor Jasa Akuntansi) Intership</h3>
+                        <p class="exp-date">Jan - March 2023</p>
+                    </div>
+                </div>
+
+                <!-- BOX 5 - PROGRAMMING PROJECT -->
+                <div class="col">
+                    <div class="exp-box" onclick="showExpDetails('programming')" style="background-image: url('Screenshot 2025-06-05 054341.png');">
+                        <h3 class="exp-title">Freelance Programming Project</h3>
+                        <p class="exp-date">2024 - Present</p>
+                    </div>
+                </div>
+
+                <!-- BOX 6 - ORGANIZATION -->
+                <div class="col">
+                    <div class="exp-box" onclick="showExpDetails('leadership')" style="background-image: url('mmft.jpg');">
+                        <h3 class="exp-title">University Organization Member</h3>
+                        <p class="exp-date">2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Box Contact button page 1 -->
+    <div id="contactModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:2000;">
+        <div class="contact-modal-content text-dark">
+            <h4 class="mb-4 text-center fw-bold fs-2">Reach me out!</h4>
+            <p class="text-center text-secondary mb-4">Please choose any direct link to contact me:</p>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/6281333397609" target="_blank" class="text-decoration-none">
+                <div class="contact-item">
+                    <span class="contact-icon fab fa-whatsapp whatsapp-color"></span>
+                    <div>
+                        <p class="mb-0 fw-bold">WhatsApp</p>
+                        <small class="text-muted">+62 813-3339-7609</small>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Telepon -->
+            <a href="tel:+6281333397609" class="text-decoration-none text-dark">
+                <div class="contact-item">
+                    <span class="contact-icon fas fa-phone phone-color"></span>
+                    <div>
+                        <p class="mb-0 fw-bold">Phone Number</p>
+                        <small class="text-muted">+62 813-3339-7609</small>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:tanezra.fb@gmail.com" class="text-decoration-none text-dark">
+                <div class="contact-item">
+                    <span class="contact-icon fas fa-envelope email-color"></span>
+                    <div>
+                        <p class="mb-0 fw-bold">Email</p>
+                        <small class="text-muted">tanezra.fb@gmail.com</small>
+                    </div>
+                </div>
+            </a>
+            
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-dark" onclick="document.getElementById('contactModal').style.display='none'">Close tab</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- detail pop out box expirience -->
+   <div id="expDetailModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:2000;">
+        <div class="exp-modal-content text-light">
+            <h4 class="exp-modal-title" id="expDetailTitle">Detailed expirience</h4>
+            <p id="expDetailContent" class="exp-modal-details">isi dari detail box button</p>
+            <div class="d-flex justify-content-end mt-4">
+                <button class="btn btn-light" onclick="document.getElementById('expDetailModal').style.display='none'">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // menampilkan home page saat load in
+            showPage('home');
+        });
+
+        /**
+         * Fungsi untuk mengganti konten halaman yang ditampilkan
+         * @param {string} pageId - ID dari div halaman yang akan ditampilkan
+         */
+        function showPage(pageId) {
+            const pages = ['home', 'data', 'exp'];
+            
+            // hide un-selected pages
+            pages.forEach(id => {
+                const pageElement = document.getElementById(id);
+                if (pageElement) {
+                    pageElement.style.display = 'none';
+                }
+            });
+
+            // Hapus status 'active' dari semua link navigasi
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // show seleceted page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+                // Atur link navigasi yang sesuai menjadi 'active'
+                document.getElementById(`link-${pageId}`).classList.add('active');
+            }
+        }
+        
+        // Data Pengalaman
+        const experiences = {
+            model: {
+                title: "Model Expirience (2021 - Present)",
+                content: `
+                    <p>As a freelance model, i work with many Companies for their brand in digital endorsment and campaign shoot.</p>
+                    <p><b>Achievement:</b></p>
+                    <ul>
+                        <li>3rd Runner Up of Surabaya Model Search by SFP (2024).</li>
+                        <li>Photoshoot sessions with many Shoes brand such as; Unerd, Reijin, and many more.</li>
+                        <li>Frescent male talent.</li>
+                        <li>Clothing brand ambassador for pier's clothing.</li>
+                    </ul>
+                `
+            },
+            toyota: {
+                title: "Toyota's Dealer Intership (Jun - Oct 2024)",
+                content: `
+                    <p>Intership at General Affairs Position and also handles Marketing Communication.</p>
+                    <p><b>Jobdesk:</b></p>
+                    <ul>
+                        <li>Building Management.</li>
+                        <li>Supporting HR team in Recruitments.</li>
+                        <li>analysing and inputting datas of all candidates from CV into company's data base.</li>
+                    </ul>
+                `
+            },
+            actor: {
+                title: "Actor Expirience (2024 - Present)",
+                content: `
+                    <p>Active in movies Project and short film project, currently on-Air project "The Hostage's Hero".</p>
+                    <p><b>Expirience:</b></p>
+                    <ul>
+                        <li>Main Supporting Character for "The Hostage's Hero" (2025).</li>
+                        <li>Top 5 Finalist of Asmara GenZ Live Auditiom (2025).</li>
+                        <li>Top notch skill on public speaking and emotion control.</li>
+                    </ul>
+                `
+            },
+            kja: {
+                title: "KJA Intership (Jan - March 2023)",
+                content: `
+                    <p>Intership at Kantor Jasa Akuntan (KJA) as Data Analyst.</p>
+                    <p><b>Jobdesk:</b></p>
+                    <ul>
+                        <li>Classifying and identifying data</li>
+                        <li>Designing and maintaining databases to ensure smooth data operations</li>
+                        <li>Filtering data to ensure high data quality</li>
+                        <li>Generating reports and visualizations to support decision-making processes</li>
+                        <li>Collecting data from various sources including financial statements and tax documents</li>
+                    </ul>
+                `
+            },
+            programming: {
+                title: "Freelance Programming Project (2024 - Present)",
+                content: `
+                    <p>Building Python-Css based program.</p>
+                    <p><b>Worked Project:</b></p>
+                    <ul>
+                        <li>Building program for store administrator.</li>
+                        <li>Building program for data analyst.</li>
+                        <li>Building program for personal finance management.</li>
+                        <li>Building program for simple automation task.</li>
+                    </ul>
+                `
+            },
+            leadership: {
+                title: "University Organization (2024)",
+                content: `
+                    <p>Served as a member in University Organization called "Mbak Mas Fakultas Teknik".</p>
+                    <p><b>Duties:</b></p>
+                    <ul>
+                        <li>Leading international meeting as a translator.</li>
+                        <li>Organizing events and activities for university students.</li>
+                        <li>Coordinating with team members to ensure smooth execution of programs.</li>
+                        <li>Representing the organization in various university functions and events.</li>
+                        <li>Contributing to the development and growth of the organization through active participation and leadership.</li>
+                    </ul>
+                `
+            }
+        };
+
+        /**
+         * Fungsi untuk menampilkan Modal Detail Experience
+         * @param {string} expId - ID pengalaman (sesuai kunci di object experiences)
+         */
+        function showExpDetails(expId) {
+            const expData = experiences[expId];
+            if (expData) {
+                document.getElementById('expDetailTitle').innerText = expData.title;
+                document.getElementById('expDetailContent').innerHTML = expData.content;
+                document.getElementById('expDetailModal').style.display = 'flex';
+            }
+        }
+    </script>
+
+</body>
+</html>
+228
